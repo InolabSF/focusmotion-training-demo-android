@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "io.focusmotion.trainingdemo"
+        minSdkVersion 15
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs '../../../../../lib/android/sdk'
+        dirs '../../../../../ext/bandkit/android'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // for Android Wear integration
+    compile 'com.google.android.gms:play-services:7.5.0'
+    compile 'com.android.support:support-v4:22.0.0'
+
+    // for Pebble integration
+    compile 'com.getpebble:pebblekit:3.0.0'
+
+    // for Microsoft Band integration
+    compile(name:'microsoft-band-1.3.10622.3')
+
+    // for FocusMotion SDK
+    debugCompile(name: 'debug/focusmotion-mobile', ext:'aar')
+    debugCompile(name: 'debug/focusmotion-mobile-pebble', ext:'aar')
+    debugCompile(name: 'debug/focusmotion-mobile-band', ext:'aar')
+    debugCompile(name: 'debug/focusmotion-mobile-wear', ext:'aar')
+    releaseCompile(name: 'release/focusmotion-mobile', ext:'aar')
+    releaseCompile(name: 'release/focusmotion-mobile-pebble', ext:'aar')
+    releaseCompile(name: 'release/focusmotion-mobile-band', ext:'aar')
+    releaseCompile(name: 'release/focusmotion-mobile-wear', ext:'aar')
+}
